@@ -4,6 +4,7 @@ public:
 	~Cube();
 
 	void printCube();
+	void shuffleCube(int numMoves);
 
 	//All descriptions for the following methods are relative to the perspective
 	//that blue is facing us with yellow on top 
