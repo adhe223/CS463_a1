@@ -1,6 +1,8 @@
 #include "Cube.h"
 #include <iostream>
 #include <random>
+#include <time.h>
+#include <string>
 using namespace std;
 
 Cube::Cube() {
@@ -29,50 +31,125 @@ void Cube::printCube() {
 }
 
 void Cube::shuffleCube(int numMoves) {
-	int count = 1;
+	srand(time(NULL));
 
-	while (count <= numMoves)
-	{
+	int count = 1;
+	int oCount = 0;
+	int bCount = 0;
+	int gCount = 0;
+	int rCount = 0;
+	int wCount = 0;
+	int yCount = 0;
+	string operation;
+
+	while (count <= numMoves) {
+		if (count == 5) {
+			int foo = 5;
+		}
+
 		int move = rand() % 12;
 
 		switch (move) {
 		case 0:
 			leftFlipUp();
+			operation = "leftFlipUp";
 			break;
 		case 1:
 			leftFlipDown();
+			operation = "leftFlipDown";
 			break;
 		case 2:
 			rightFlipUp();
+			operation = "rightFlipUp";
 			break;
 		case 3:
 			rightFlipDown();
+			operation = "rightFlipDown";
 			break;
 		case 4:
 			topRotateRight();
+			operation = "topRotateRight";
 			break;
 		case 5:
 			topRotateLeft();
+			operation = "topRotateLeft";
 			break;
 		case 6:
 			bottomRotateRight();
+			operation = "bottomRotateRight";
 			break;
 		case 7:
 			bottomRotateLeft();
+			operation = "bottomRotateLeft";
 			break;
 		case 8:
 			poleCloseRight();
+			operation = "poleCloseRight";
 			break;
 		case 9:
 			poleCloseLeft();
+			operation = "poleCloseLeft";
 			break;
 		case 10:
 			poleFarRight();
+			operation = "poleFarRight";
 			break;
 		case 11:
 			poleFarLeft();
+			operation = "poleFarLeft";
+			break;
+		default:
 			break;
 		}
+
+		//Debugging
+		for (int i = 0; i < 24; i++) {
+			char c = cube[i];
+
+			switch (c) {
+			case 'o':
+				oCount++;
+				break;
+			case 'y':
+				yCount++;
+				break;
+			case 'r':
+				rCount++;
+				break;
+			case 'b':
+				bCount++;
+				break;
+			case 'g':
+				gCount++;
+				break;
+			case 'w':
+				wCount++;
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (oCount > 4 || bCount > 4 || gCount > 4 || rCount > 4 || wCount > 4 || yCount > 4) {
+			cout << endl << "Data Leak: " << "Iter: " << count << " - On operation " << operation << endl << endl;
+		}
+
+		if (count == numMoves) {
+			cout << endl << "Iteration: " << count << endl;
+			cout << "Orange Count: " << oCount << endl;
+			cout << "Yellow Count: " << yCount << endl;
+			cout << "Red Count: " << rCount << endl;
+			cout << "Blue Count: " << bCount << endl;
+			cout << "Green Count: " << gCount << endl;
+			cout << "White Count: " << wCount << endl << endl;
+		}
+
+		oCount = 0;
+		bCount = 0;
+		gCount = 0;
+		rCount = 0;
+		wCount = 0;
+		yCount = 0;
 
 		count++;
 	}
@@ -121,8 +198,8 @@ void Cube::leftFlipDown() {
 	cube[19] = temp20;
 
 	//Will also alter the side
-	char temp5 = cube[4];
-	char temp12 = cube[13];
+	char temp5 = cube[5];
+	char temp12 = cube[12];
 
 	cube[5] = cube[4];
 	cube[12] = cube[13];
@@ -308,7 +385,7 @@ void Cube::poleCloseRight() {
 
 	cube[6] = cube[14];
 	cube[15] = cube[7];
-	cube[15] = temp15;
+	cube[14] = temp15;
 	cube[7] = temp6;
 }
 

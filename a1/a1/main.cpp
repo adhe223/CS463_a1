@@ -9,7 +9,7 @@ int main()
 	rubik->printCube();
 	cout << endl << endl << endl;
 
-	rubik->shuffleCube(1);
+	rubik->shuffleCube(100000);
 
 	rubik->printCube();
 
