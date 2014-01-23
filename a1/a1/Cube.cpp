@@ -10,6 +10,8 @@ Cube::Cube() {
 	for (int i = 0; i < 24; i++) {
 		cube[i] = orig[i];
 	}
+
+	moveCounter = 0;
 }
 
 Cube::~Cube() {}
@@ -465,4 +467,104 @@ void Cube::poleFarLeft() {
 	cube[19] = cube[11];
 	cube[11] = temp10;
 	cube[18] = temp19;
+}
+
+//Translates the move on a certain face to the equivalent move from the perspective of the front (solved blue side, 2)
+void Cube::move(int face, string move) {
+	switch (face) {
+	case 0:
+		if (move == "leftFlipUp") { leftFlipUp(); }
+		else if (move == "leftFlipDown") { leftFlipDown(); }
+		else if (move == "rightFlipUp") { rightFlipUp(); }
+		else if (move == "rightFlipDown") { rightFlipDown(); }
+		else if (move == "topRotateRight") { poleFarRight(); }
+		else if (move == "topRotateLeft") { poleFarLeft(); }
+		else if (move == "bottomRotateRight") { poleCloseRight(); }
+		else if (move == "bottomRotateLeft") { poleCloseLeft(); }
+		else if (move == "poleCloseRight") { topRotateLeft(); }
+		else if (move == "poleCloseLeft") { topRotateRight(); }
+		else if (move == "poleFarLeft") { bottomRotateRight(); }
+		else if (move == "poleFarRight") { bottomRotateLeft(); }
+		moveCounter++;
+		break;
+	case 1:
+		if (move == "leftFlipUp") { poleFarRight(); }
+		else if (move == "leftFlipDown") { poleFarLeft(); }
+		else if (move == "rightFlipUp") { poleCloseRight(); }
+		else if (move == "rightFlipDown") { poleCloseLeft(); }
+		else if (move == "topRotateRight") { topRotateRight(); }
+		else if (move == "topRotateLeft") { topRotateLeft(); }
+		else if (move == "bottomRotateRight") { bottomRotateRight(); }
+		else if (move == "bottomRotateLeft") { bottomRotateLeft(); }
+		else if (move == "poleCloseRight") { leftFlipDown(); }
+		else if (move == "poleCloseLeft") { leftFlipUp(); }
+		else if (move == "poleFarLeft") { rightFlipUp(); }
+		else if (move == "poleFarRight") { rightFlipDown(); }
+		moveCounter++;
+		break;
+		//case 2 is our front
+	case 2:
+		if (move == "leftFlipUp") { leftFlipUp(); }
+		else if (move == "leftFlipDown") { leftFlipDown(); }
+		else if (move == "rightFlipUp") { rightFlipUp(); }
+		else if (move == "rightFlipDown") { rightFlipDown(); }
+		else if (move == "topRotateRight") { topRotateRight(); }
+		else if (move == "topRotateLeft") { topRotateLeft(); }
+		else if (move == "bottomRotateRight") { bottomRotateRight(); }
+		else if (move == "bottomRotateLeft") { bottomRotateLeft(); }
+		else if (move == "poleCloseRight") { poleCloseRight(); }
+		else if (move == "poleCloseLeft") { poleCloseLeft(); }
+		else if (move == "poleFarLeft") { poleFarLeft(); }
+		else if (move == "poleFarRight") { poleFarRight(); }
+		moveCounter++;
+		break;
+	case 3:
+		if (move == "leftFlipUp") { poleCloseLeft(); }
+		else if (move == "leftFlipDown") { poleCloseRight(); }
+		else if (move == "rightFlipUp") { poleFarLeft(); }
+		else if (move == "rightFlipDown") { poleFarRight(); }
+		else if (move == "topRotateRight") { topRotateRight(); }
+		else if (move == "topRotateLeft") { topRotateLeft(); }
+		else if (move == "bottomRotateRight") { bottomRotateRight(); }
+		else if (move == "bottomRotateLeft") { bottomRotateLeft(); }
+		else if (move == "poleCloseRight") { rightFlipUp(); }
+		else if (move == "poleCloseLeft") { rightFlipDown(); }
+		else if (move == "poleFarLeft") { leftFlipDown(); }
+		else if (move == "poleFarRight") { leftFlipUp(); }
+		moveCounter++;
+		break;
+	case 4:
+		if (move == "leftFlipUp") { rightFlipDown(); }
+		else if (move == "leftFlipDown") { rightFlipUp(); }
+		else if (move == "rightFlipUp") { leftFlipDown(); }
+		else if (move == "rightFlipDown") { leftFlipUp(); }
+		else if (move == "topRotateRight") { topRotateRight(); }
+		else if (move == "topRotateLeft") { topRotateLeft(); }
+		else if (move == "bottomRotateRight") { bottomRotateRight(); }
+		else if (move == "bottomRotateLeft") { bottomRotateLeft(); }
+		else if (move == "poleCloseRight") { poleFarLeft(); }
+		else if (move == "poleCloseLeft") { poleFarRight(); }
+		else if (move == "poleFarLeft") { poleCloseRight(); }
+		else if (move == "poleFarRight") { poleCloseLeft(); }
+		moveCounter++;
+		break;
+	case 5:
+		if (move == "leftFlipUp") { leftFlipUp(); }
+		else if (move == "leftFlipDown") { leftFlipDown(); }
+		else if (move == "rightFlipUp") { rightFlipUp(); }
+		else if (move == "rightFlipDown") { rightFlipDown(); }
+		else if (move == "topRotateRight") { poleCloseLeft(); }
+		else if (move == "topRotateLeft") { poleCloseRight(); }
+		else if (move == "bottomRotateRight") { poleFarLeft(); }
+		else if (move == "bottomRotateLeft") { poleFarRight(); }
+		else if (move == "poleCloseRight") { bottomRotateRight(); }
+		else if (move == "poleCloseLeft") { bottomRotateLeft(); }
+		else if (move == "poleFarLeft") { topRotateLeft(); }
+		else if (move == "poleFarRight") { topRotateRight(); }
+		moveCounter++;
+		break;
+	default:	//If face input is invalide
+		cout << "Face input is invalid" << endl;
+		break;
+	}
 }

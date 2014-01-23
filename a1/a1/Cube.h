@@ -1,3 +1,5 @@
+#include <string>
+
 class Cube {
 public:
 	Cube();
@@ -21,6 +23,12 @@ public:
 	void poleFarRight();		//The half of the top of the cube furthest is rotated right
 	void poleFarLeft();			//The half of the top of the cube furthest is rotated left
 
+	//Method that allows user input. It takes in a face number and maps that to the
+	//equivalent move from the perspective of out "front" side (the unsolved blue side).
+	//[Top is 0, Left is 1, Front is 2, Right is 3, Back is 4, Bottom is 5]
+	void move(int face, std::string move);
+
 private:
 	char cube[24];
+	int moveCounter; //Counter for the move function to manipulate so we know how long it takes to solve
 };
