@@ -6,11 +6,8 @@ int main()
 {
 	Cube * rubik = new Cube();
 
+	rubik->shuffleCube(100);
 	rubik->printCube();
-	cout << endl << endl << endl;
-
-	//rubik->shuffleCube(100000);
-	//rubik->printCube();
 
 	bool  quit = false;
 	while (!quit) {
@@ -24,7 +21,12 @@ int main()
 			cout << "Now enter the move you'd like to make (options can be found in the documentation): ";
 			cin >> move;
 
-			rubik->move(face, move);
+			if (!rubik->move(face, move)) {
+				cout << "That is not a valid move!" << endl;
+			}
+			else {
+				rubik->printCube();
+			}
 		}		
 	}
 
